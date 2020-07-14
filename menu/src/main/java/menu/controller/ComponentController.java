@@ -1,6 +1,7 @@
 package menu.controller;
 
 import menu.entity.Component;
+import menu.payload.ComponentRequest;
 import menu.service.ComponentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,8 +29,8 @@ public class ComponentController {
             value = "Update or create new component",
             authorizations = @Authorization(value="jwtToken")
     )
-    public ResponseEntity<Component> addComponent(@RequestBody Component component) {
-        return new ResponseEntity<>(componentService.addComponent(component), HttpStatus.OK);
+    public ResponseEntity<Component> addComponent(@RequestBody ComponentRequest componentRequest) {
+        return new ResponseEntity<>(componentService.addComponent(componentRequest), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

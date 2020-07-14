@@ -1,7 +1,10 @@
 package menu.service;
 
 import menu.entity.Beverage;
+import menu.entity.Component;
+import menu.entity.Recipe;
 import menu.exception.InvalidIdException;
+import menu.payload.BeverageRequest;
 import menu.repository.BeverageRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +21,23 @@ public class BeverageService {
         this.componentService = componentService;
     }
 
-    public Beverage addBeverage(Beverage beverage) {
+    public Beverage addBeverage(BeverageRequest beverageRequest) {
+        Beverage beverage = new Beverage();
+        beverage.setId(beverageRequest.getId());
+        beverage.setBeverageName(beverageRequest.getName());
+        beverage.setPrice(beverageRequest.getPrice());
+        beverageRequest.getRecipe().forEach(component -> {
+            Component recipeComponent = componentService.getComponent(component.getComponentId());
+            Recipe recipe = new Recipe();
+            recipe.setComponent(recipeComponent);
+            recipe.setQuantity(component.getQuantity());
+            recipe.setBeverage(beverage);
+            beverage.getRecipe().add(recipe);
+        });
+
         if (beverage.getId() != null) {
             deleteBeverage(beverage.getId());
         }
-
-        beverage.getRecipe().forEach(component -> {
-            component.setComponent(componentService.getComponent(component.getComponent().getId()));
-            component.setBeverage(beverage);
-        });
 
         return beverageRepository.save(beverage);
     }

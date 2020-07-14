@@ -1,6 +1,8 @@
 package menu.controller;
 
 import menu.entity.Beverage;
+import menu.payload.BeverageRequest;
+import menu.repository.BeverageRepository;
 import menu.service.BeverageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,7 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/w/beverages")
 @Api
-
 public class BeverageController {
     private BeverageService beverageService;
 
@@ -29,8 +30,8 @@ public class BeverageController {
             value = "Update or create new beverage",
             authorizations = @Authorization(value="jwtToken")
     )
-    public ResponseEntity<Beverage> addBeverage(@RequestBody Beverage beverage) {
-        return new ResponseEntity<>(beverageService.addBeverage(beverage), HttpStatus.OK);
+    public ResponseEntity<Beverage> addBeverage(@RequestBody BeverageRequest beverageRequest) {
+        return new ResponseEntity<>(beverageService.addBeverage(beverageRequest), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

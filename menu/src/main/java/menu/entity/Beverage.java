@@ -19,7 +19,7 @@ public class Beverage {
     private String beverageName;
 
     @Column(nullable = false)
-    private Double price;
+    private Long price;
 
     @Column(name = "customer_id")
     private Long customerId;

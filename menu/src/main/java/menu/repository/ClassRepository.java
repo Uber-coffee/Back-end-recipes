@@ -1,9 +1,10 @@
 package menu.repository;
 
-import menu.entity.Component;
+import menu.entity.Class;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ComponentRepository extends JpaRepository<Component, Long> {
+public interface ClassRepository extends JpaRepository<Class, Long> {
+    Class findByName(String name);
 }

@@ -15,8 +15,8 @@ public class Component {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "component", cascade = CascadeType.ALL)
-    private Class myClass;
+    @ManyToOne
+    private Class category;
 
     @Column(nullable = false)
     private String name;
