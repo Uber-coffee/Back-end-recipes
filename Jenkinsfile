@@ -6,7 +6,7 @@ node {
     try {
         stage('git') {
             git([
-                    url: 'git@github.com:Uber-coffee/Back-end.git',
+                    url: 'git@github.com:Uber-coffee/Back-end-recipes.git',
                     branch: "${env.BRANCH_NAME}",
                     credentialsId: "meshcheryakov_backend"
             ])
@@ -16,26 +16,27 @@ node {
             telegram_msg("Build ${env.BRANCH_NAME} started. Build id: ${env.BUILD_ID}")
         }
 
-        
-		docker.image('maven:3.6.3-openjdk-11').inside() {
-			stage('Run tests') {
-				sh 'mvn test'
-			}
+		dir('menu') {
+			docker.image('maven:3.6.3-openjdk-11').inside() {
+				stage('Run tests') {
+					sh 'mvn test'
+				}
 
-			stage('Build project') {
-				sh 'mvn -DskipTests package spring-boot:repackage'
+				stage('Build project') {
+					sh 'mvn -DskipTests package spring-boot:repackage'
+				}
 			}
 		}
 		
 		if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'master') {
 			dir('menu') {
 				stage('Build docker image') {
-					docker.build("trade_point:${env.BUILD_ID}")
+					docker.build("menu-service:${env.BUILD_ID}")
 				}
 			}
 			
 			stage('Build success notification') {
-				telegram_msg("Build ${env.BRANCH_NAME} finished, image: trade_point: ${env.BUILD_ID}")
+				telegram_msg("Build ${env.BRANCH_NAME} finished, image: menu-service: ${env.BUILD_ID}")
 			}
 		      
 			stage('Push to registry and deploy (dev)') {
@@ -62,7 +63,7 @@ node {
 
 def telegram_msg(String msg) {
     telegramSend(
-            message: "Menu service: " + msg,
+            message: "Menu-service: " + msg,
             chatId: -1001336690990
     )
 }
