@@ -1,9 +1,7 @@
 package menu.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 
@@ -15,7 +13,7 @@ public class Class {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     @Column(name = "is_single", nullable = false)

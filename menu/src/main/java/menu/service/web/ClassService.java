@@ -1,4 +1,4 @@
-package menu.service;
+package menu.service.web;
 
 import menu.entity.Class;
 import menu.exception.InvalidIdException;

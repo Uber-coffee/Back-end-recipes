@@ -1,9 +1,9 @@
-package menu.controller;
+package menu.controller.web;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import menu.entity.Class;
-import menu.service.ClassService;
+import menu.service.web.ClassService;
 import menu.swagger.SwaggerMethodToDocument;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

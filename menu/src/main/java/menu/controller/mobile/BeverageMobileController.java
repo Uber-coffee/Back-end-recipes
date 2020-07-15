@@ -1,0 +1,32 @@
+package menu.controller.mobile;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import menu.payload.mobile.BeverageResponse;
+import menu.service.mobile.BeverageMobileService;
+import menu.swagger.SwaggerMethodToDocument;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/m/beverages")
+@Api
+public class BeverageMobileController {
+    private BeverageMobileService beverageMobileService;
+
+    public BeverageMobileController(BeverageMobileService beverageMobileService) {
+        this.beverageMobileService = beverageMobileService;
+    }
+
+    @GetMapping
+    @SwaggerMethodToDocument
+    @ApiOperation(value = "Update or create new beverage")
+    public ResponseEntity<List<BeverageResponse>> getBeverages() {
+        return new ResponseEntity<>(beverageMobileService.getBeverages(), HttpStatus.OK);
+    }
+}

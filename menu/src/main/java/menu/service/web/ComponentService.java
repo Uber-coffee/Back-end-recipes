@@ -1,8 +1,8 @@
-package menu.service;
+package menu.service.web;
 
 import menu.entity.Component;
 import menu.exception.InvalidIdException;
-import menu.payload.ComponentRequest;
+import menu.payload.web.ComponentRequest;
 import menu.repository.ComponentRepository;
 import org.springframework.stereotype.Service;
 

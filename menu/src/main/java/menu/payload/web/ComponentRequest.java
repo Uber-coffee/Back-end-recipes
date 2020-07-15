@@ -1,4 +1,4 @@
-package menu.payload;
+package menu.payload.web;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

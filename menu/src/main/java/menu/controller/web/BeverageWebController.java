@@ -1,9 +1,8 @@
-package menu.controller;
+package menu.controller.web;
 
 import menu.entity.Beverage;
-import menu.payload.BeverageRequest;
-import menu.repository.BeverageRepository;
-import menu.service.BeverageService;
+import menu.payload.web.BeverageRequest;
+import menu.service.web.BeverageWebService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
@@ -17,11 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/w/beverages")
 @Api
-public class BeverageController {
-    private BeverageService beverageService;
+public class BeverageWebController {
+    private BeverageWebService beverageWebService;
 
-    public BeverageController(BeverageService beverageService) {
-        this.beverageService = beverageService;
+    public BeverageWebController(BeverageWebService beverageWebService) {
+        this.beverageWebService = beverageWebService;
     }
 
     @PostMapping
@@ -31,7 +30,7 @@ public class BeverageController {
             authorizations = @Authorization(value="jwtToken")
     )
     public ResponseEntity<Beverage> addBeverage(@RequestBody BeverageRequest beverageRequest) {
-        return new ResponseEntity<>(beverageService.addBeverage(beverageRequest), HttpStatus.OK);
+        return new ResponseEntity<>(beverageWebService.addBeverage(beverageRequest), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -41,7 +40,7 @@ public class BeverageController {
             authorizations = @Authorization(value="jwtToken")
     )
     public ResponseEntity<Beverage> getBeverage(@PathVariable Long id) {
-        return new ResponseEntity<>(beverageService.getBeverage(id), HttpStatus.OK);
+        return new ResponseEntity<>(beverageWebService.getBeverage(id), HttpStatus.OK);
     }
 
     @GetMapping
@@ -51,7 +50,7 @@ public class BeverageController {
             authorizations = @Authorization(value="jwtToken")
     )
     public ResponseEntity<List<Beverage>> getBeverages() {
-        return new ResponseEntity<>(beverageService.getBeverages(), HttpStatus.OK);
+        return new ResponseEntity<>(beverageWebService.getBeverages(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -61,6 +60,6 @@ public class BeverageController {
             authorizations = @Authorization(value="jwtToken")
     )
     public void deleteBeverage(@PathVariable Long id) {
-        beverageService.deleteBeverage(id);
+        beverageWebService.deleteBeverage(id);
     }
 }

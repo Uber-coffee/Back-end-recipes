@@ -1,8 +1,8 @@
-package menu.controller;
+package menu.controller.web;
 
 import menu.entity.Component;
-import menu.payload.ComponentRequest;
-import menu.service.ComponentService;
+import menu.payload.web.ComponentRequest;
+import menu.service.web.ComponentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;

@@ -1,10 +1,10 @@
-package menu.service;
+package menu.service.web;
 
 import menu.entity.Beverage;
 import menu.entity.Component;
 import menu.entity.Recipe;
 import menu.exception.InvalidIdException;
-import menu.payload.BeverageRequest;
+import menu.payload.web.BeverageRequest;
 import menu.repository.BeverageRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BeverageService {
+public class BeverageWebService {
     private BeverageRepository beverageRepository;
     private ComponentService componentService;
 
-    public BeverageService(BeverageRepository beverageRepository, ComponentService componentService) {
+    public BeverageWebService(BeverageRepository beverageRepository, ComponentService componentService) {
         this.beverageRepository = beverageRepository;
         this.componentService = componentService;
     }
