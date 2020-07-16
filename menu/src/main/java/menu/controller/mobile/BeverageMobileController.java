@@ -2,6 +2,7 @@ package menu.controller.mobile;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import menu.payload.mobile.BeverageResponse;
 import menu.service.mobile.BeverageMobileService;
 import menu.swagger.SwaggerMethodToDocument;
@@ -27,7 +28,10 @@ public class BeverageMobileController {
 
     @GetMapping
     @SwaggerMethodToDocument
-    @ApiOperation(value = "Update or create new beverage")
+    @ApiOperation(
+            value = "Update or create new beverage",
+            authorizations = @Authorization(value="jwtToken")
+    )
     public ResponseEntity<List<BeverageResponse>> getBeverages() {
         return new ResponseEntity<>(beverageMobileService.getBeverages(), HttpStatus.OK);
     }
