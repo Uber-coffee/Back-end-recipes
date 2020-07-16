@@ -23,8 +23,14 @@ spring:
     driver-class-name: org.postgresql.Driver
   main:
     allow-bean-definition-overriding: true
-    auth:
-      token:
-        enabled: true
-        id-field: sub
-        roles-field: roles
+auth:
+  token:
+    enabled: true
+      id-field: sub
+      roles-field: roles
+      whitelist:
+        - /configuration/**
+        - /swagger-resources/**
+        - /swagger-ui.html
+        - /v2/api-docs
+        - /webjars/**
