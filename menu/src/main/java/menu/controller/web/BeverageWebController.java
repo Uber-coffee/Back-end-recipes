@@ -9,12 +9,14 @@ import io.swagger.annotations.Authorization;
 import menu.swagger.SwaggerMethodToDocument;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/w/beverages")
+@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 @Api
 public class BeverageWebController {
     private BeverageWebService beverageWebService;
