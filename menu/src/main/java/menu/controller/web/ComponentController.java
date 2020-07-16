@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class ComponentController {
             value = "Update or create new component",
             authorizations = @Authorization(value="jwtToken")
     )
-    public ResponseEntity<Component> addComponent(@RequestBody ComponentRequest componentRequest) {
+    public ResponseEntity<Component> addComponent(@Valid @RequestBody ComponentRequest componentRequest) {
         return new ResponseEntity<>(componentService.addComponent(componentRequest), HttpStatus.OK);
     }
 

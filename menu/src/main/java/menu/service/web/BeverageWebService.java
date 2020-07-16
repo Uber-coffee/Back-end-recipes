@@ -6,8 +6,10 @@ import menu.entity.Recipe;
 import menu.exception.InvalidIdException;
 import menu.payload.web.BeverageRequest;
 import menu.repository.BeverageRepository;
+import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +38,10 @@ public class BeverageWebService {
         });
 
         if (beverage.getId() != null) {
-            deleteBeverage(beverage.getId());
+            beverage.getRecipe().forEach(component -> {
+                component.getRecipeId().setBeverageId(beverage.getId());
+                component.getRecipeId().setComponentId(component.getComponent().getId());
+            });
         }
 
         return beverageRepository.save(beverage);
@@ -47,9 +52,11 @@ public class BeverageWebService {
     }
 
     public Beverage getBeverage(Long id) throws InvalidIdException {
-        Optional<Beverage> beverage = beverageRepository.findById(id);
-        if (beverage.isPresent()) {
-            return beverage.get();
+        if (id != null) {
+            Optional<Beverage> beverage = beverageRepository.findById(id);
+            if (beverage.isPresent()) {
+                return beverage.get();
+            }
         }
 
         throw new InvalidIdException("There is no beverage with such id");

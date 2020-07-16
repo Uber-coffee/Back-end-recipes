@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class BeverageWebController {
             value = "Update or create new beverage",
             authorizations = @Authorization(value="jwtToken")
     )
-    public ResponseEntity<Beverage> addBeverage(@RequestBody BeverageRequest beverageRequest) {
+    public ResponseEntity<Beverage> addBeverage(@Valid @RequestBody BeverageRequest beverageRequest) {
         return new ResponseEntity<>(beverageWebService.addBeverage(beverageRequest), HttpStatus.OK);
     }
 

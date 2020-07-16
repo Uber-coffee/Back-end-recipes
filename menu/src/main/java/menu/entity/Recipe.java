@@ -14,16 +14,17 @@ public class Recipe {
     @JsonIgnore
     private RecipeId recipeId = new RecipeId();
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("beverageId")
     @JoinColumn(name = "beverage_id")
     @JsonIgnore
     private Beverage beverage;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @MapsId("componentId")
     @JoinColumn(name = "component_id")
     private Component component;
 
+    @Column(nullable = false)
     private Long quantity;
 }

@@ -14,7 +14,7 @@ import java.util.Date;
 @ControllerAdvice
 public class MenuExceptionHandler {
     @ExceptionHandler(value = {InvalidIdException.class})
-    protected ResponseEntity<Object> InvalidIdExceptionHandle(InvalidIdException invalidIdException) {
+    protected ResponseEntity<Object> invalidIdExceptionHandle(InvalidIdException invalidIdException) {
         return new ResponseEntity<>(new ApiExceptionResponseEntity(
                 new Date(),
                 invalidIdException.getMessage()), HttpStatus.NOT_FOUND

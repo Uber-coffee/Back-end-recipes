@@ -8,6 +8,7 @@ import menu.swagger.SwaggerMethodToDocument;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,28 +27,28 @@ public class ClassController {
     @PostMapping
     @SwaggerMethodToDocument
     @ApiOperation(value = "Update or create new class")
-    ResponseEntity<Class> addClass(@RequestBody Class category) {
+    public ResponseEntity<Class> addClass(@Validated @RequestBody Class category) {
         return new ResponseEntity<>(classService.addClass(category), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     @SwaggerMethodToDocument
     @ApiOperation(value = "Get class by id")
-    ResponseEntity<Class> getClass(@PathVariable Long id) {
+    public ResponseEntity<Class> getClass(@PathVariable Long id) {
         return new ResponseEntity<>(classService.getClass(id), HttpStatus.OK);
     }
 
     @GetMapping
     @SwaggerMethodToDocument
     @ApiOperation(value = "Get set of all classes")
-    ResponseEntity<List<Class>> getClasses() {
+    public ResponseEntity<List<Class>> getClasses() {
         return new ResponseEntity<>(classService.getClasses(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     @SwaggerMethodToDocument
     @ApiOperation(value = "Delete class with current id")
-    void deleteClass(@PathVariable Long id) {
+    public void deleteClass(@PathVariable Long id) {
         classService.deleteClass(id);
     }
 }

@@ -33,10 +33,13 @@ public class ComponentService {
     }
 
     public Component getComponent(Long id) throws InvalidIdException {
-        Optional<Component> component = componentRepository.findById(id);
-        if (component.isPresent()) {
-            return component.get();
+        if (id != null) {
+            Optional<Component> component = componentRepository.findById(id);
+            if (component.isPresent()) {
+                return component.get();
+            }
         }
+
         throw new InvalidIdException("There is no component with such id");
     }
 

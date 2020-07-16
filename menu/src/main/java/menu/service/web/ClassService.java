@@ -21,9 +21,11 @@ public class ClassService {
     }
 
     public Class getClass(Long id) {
-        Optional<Class> category = classRepository.findById(id);
-        if (category.isPresent()) {
-            return category.get();
+        if (id != null) {
+            Optional<Class> category = classRepository.findById(id);
+            if (category.isPresent()) {
+                return category.get();
+            }
         }
 
         throw new InvalidIdException("There is no class with such id");

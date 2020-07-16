@@ -24,7 +24,7 @@ public class Component {
     @Column(nullable = false)
     private Measure measure;
 
-    @OneToMany(mappedBy = "component", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "component")
     @JsonIgnore
     private List<Recipe> recipe;
 

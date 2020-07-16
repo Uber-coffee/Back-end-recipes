@@ -5,9 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import menu.entity.Component;
 
-import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.math.BigInteger;
+import javax.validation.constraints.Positive;
 
 @Data
 @NoArgsConstructor
@@ -17,9 +17,11 @@ public class ComponentRequest {
     private Long id;
 
     @NotNull
+    @Positive
     private Long categoryId;
 
     @NotNull
+    @NotEmpty
     private String name;
 
     @NotNull
