@@ -3,6 +3,7 @@ package menu.controller.web;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import menu.entity.Class;
+import menu.payload.web.ClassRequest;
 import menu.service.web.ClassService;
 import menu.swagger.SwaggerMethodToDocument;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,8 +29,8 @@ public class ClassController {
     @PostMapping
     @SwaggerMethodToDocument
     @ApiOperation(value = "Update or create new class")
-    public ResponseEntity<Class> addClass(@Validated @RequestBody Class category) {
-        return new ResponseEntity<>(classService.addClass(category), HttpStatus.OK);
+    public ResponseEntity<Class> addClass(@Valid @RequestBody ClassRequest classRequest) {
+        return new ResponseEntity<>(classService.addClass(classRequest), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

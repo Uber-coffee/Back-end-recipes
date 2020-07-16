@@ -2,6 +2,7 @@ package menu.service.web;
 
 import menu.entity.Class;
 import menu.exception.InvalidIdException;
+import menu.payload.web.ClassRequest;
 import menu.repository.ClassRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,13 @@ public class ClassService {
         this.classRepository = classRepository;
     }
 
-    public Class addClass(Class category) {
+    public Class addClass(ClassRequest classRequest) {
+        Class category = new Class();
+        category.setId(classRequest.getId());
+        category.setName(classRequest.getName());
+        category.setIsRequired(classRequest.getIsRequired());
+        category.setIsSingle(classRequest.getIsSingle());
+
         return classRepository.save(category);
     }
 
