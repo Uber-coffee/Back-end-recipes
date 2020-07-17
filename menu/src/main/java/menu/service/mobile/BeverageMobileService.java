@@ -56,7 +56,7 @@ public class BeverageMobileService {
                                     .collect(Collectors.toList());
 
                     Double volume = 0.0;
-                    if (optionalVolume.isEmpty()) {
+                    if (optionalVolume.isPresent()) {
                         volume = optionalVolume.get();
                     }
 

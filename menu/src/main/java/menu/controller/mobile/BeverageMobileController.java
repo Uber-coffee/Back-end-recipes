@@ -29,7 +29,7 @@ public class BeverageMobileController {
     @GetMapping
     @SwaggerMethodToDocument
     @ApiOperation(
-            value = "Update or create new beverage",
+            value = "Get beverages",
             authorizations = @Authorization(value="jwtToken")
     )
     public ResponseEntity<List<BeverageResponse>> getBeverages() {
